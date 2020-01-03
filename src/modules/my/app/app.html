@@ -22,9 +22,23 @@
             <a href="https://lwc.dev" class="link" target="_blank">Learn LWC</a>
         </div>
     </div>
-    <base-illustration
-        variant="WalkthroughNotAvailable"
-        size="large"
-        heading="suck it!"
-    ></base-illustration>
+    <base-card>
+        <base-illustration
+            variant="WalkthroughNotAvailable"
+            size="large"
+            heading="This is the message"
+        ></base-illustration>
+    </base-card>
+    <base-card>
+        <base-button
+            variant="neutral"
+            label="url button"
+            url="https://google.com"
+        ></base-button>
+        <base-button variant="brand" label="brand button"></base-button>
+        <base-button variant="neutral" label="disabled" disabled></base-button>
+    </base-card>
+    <base-card>
+        <base-progress-bar value="50"></base-progress-bar>
+    </base-card>
 </template>

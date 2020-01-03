@@ -1,15 +1,15 @@
-import { LightningElement, api, track } from 'lwc';
+import { LightningElement, api } from 'lwc';
 
 export default class ProgressBar extends LightningElement {
     @api description;
-    @track _progress = 0;
+    _progress = 0;
 
     @api
-    set progress(value) {
+    set value(value) {
         this._progress = Math.round(value);
     }
 
-    get progress() {
+    get value() {
         return this._progress;
     }
 
