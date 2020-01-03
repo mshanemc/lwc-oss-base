@@ -1,5 +1,5 @@
 {
-    "name": "lwc-oss-base",
+    "name": "@mshanemc/lwc-oss-base",
     "description": "baes components for sharing across lwc-oss projects",
     "version": "0.0.0",
     "author": "mshanemc",
