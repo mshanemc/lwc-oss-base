@@ -16,6 +16,9 @@
     "engines": {
         "node": ">=10.0.0"
     },
+    "files": [
+        "src/modules/base"
+    ],
     "homepage": "https://github.com/mshanemc/lwc-oss-base",
     "husky": {
         "hooks": {
