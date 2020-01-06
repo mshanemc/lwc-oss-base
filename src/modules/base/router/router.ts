@@ -1,9 +1,38 @@
 // TODO: how to define notFound behavior
-// TODO: how to define base route (in route table with empty string?)
 // TODO: integrate analytics tracking events, with GA example
 
 import { createElement } from 'lwc';
 import Navigo from 'navigo';
+
+const getQueryVariables = query => {
+    const output = {};
+
+    const queries = query.split('&');
+
+    queries.forEach(item => {
+        const pair = item.split('=');
+        output[pair[0]] = pair[1];
+    });
+
+    return output;
+};
+
+const generateProps = (params, query, route) => {
+    const props = {};
+    if (query && route.queryMap) {
+        const queryVars = getQueryVariables(query);
+        route.queryMap.forEach(queryMapItem => {
+            props[queryMapItem.prop] = queryVars[queryMapItem.query];
+        });
+    }
+    if (params && route.paramMap) {
+        route.paramMap.forEach(paramMapItem => {
+            props[paramMapItem.prop] = params[paramMapItem.param];
+        });
+    }
+
+    return props;
+};
 
 class lwcRouter {
     targetElement;
@@ -44,10 +73,11 @@ class lwcRouter {
     buildRoutes = () => {
         const output = {};
         for (const route of this.routeTable) {
-            output[route.name] = async () =>
+            output[route.name] = async (params, query) =>
                 this.setPage(
                     route.tagName ? route.tagName : `route-${route.name}`,
-                    route.component
+                    route.component,
+                    generateProps(params, query, route)
                 );
         }
         this.routes = output;
@@ -55,9 +85,23 @@ class lwcRouter {
 }
 
 interface Route {
-    name: string;
-    component: any;
-    tagName?: string;
+    name: string; // the route name, like '/home' or '/user/:userid"
+    component: any; // will usually be a ProperCase name of the class exported by your LWC
+    tagName?: string; // the name you would use in html for your compponent, including the namespace.  ex: my-kebab-case-component
+    queryMap?: [
+        // you want to use query parames from the url as LWC properties. ex: /whatever?id=1234
+        {
+            query: string;
+            prop: string;
+        }
+    ];
+    paramMap?: [
+        // you want to use url path variabls from the url as LWC properties /whatever/:id
+        {
+            param: string;
+            prop: string;
+        }
+    ];
 }
 
 interface LWCRouterInput {
