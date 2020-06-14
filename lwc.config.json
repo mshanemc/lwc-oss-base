@@ -1,0 +1,16 @@
+{
+    "modules": [
+        {
+            "dir": "src/modules"
+        }
+    ],
+    "expose": [
+        "base/button",
+        "base/card",
+        "base/enforceHttps",
+        "base/progressBar",
+        "base/router",
+        "base/slds",
+        "base/utils"
+    ]
+}
