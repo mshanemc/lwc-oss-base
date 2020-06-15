@@ -1,7 +1,7 @@
 {
     "name": "@mshanemc/lwc-oss-base",
     "description": "baes components for sharing across lwc-oss projects",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "author": "mshanemc",
     "bugs": "https://github.com/mshanemc/lwc-oss-base/issues",
     "dependencies": {
