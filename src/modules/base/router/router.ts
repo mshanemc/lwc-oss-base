@@ -92,7 +92,7 @@ class lwcRouter {
 interface Route {
     name: string; // the route name, like '/home' or '/user/:userid"
     component: any; // will usually be a ProperCase name of the class exported by your LWC
-    tagName?: string; // the name you would use in html for your compponent, including the namespace.  ex: my-kebab-case-component
+    tagName?: string; // the name you would use in html for your component, including the namespace.  ex: my-kebab-case-component
     queryMap?: [
         // you want to use query parames from the url as LWC properties. ex: /whatever?id=1234
         {
@@ -101,7 +101,7 @@ interface Route {
         }
     ];
     paramMap?: [
-        // you want to use url path variabls from the url as LWC properties /whatever/:id
+        // you want to use url path variables from the url as LWC properties /whatever/:id
         {
             param: string;
             prop: string;
