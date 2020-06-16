@@ -4,14 +4,19 @@
 import { createElement } from 'lwc';
 import Navigo from 'navigo';
 
-const getQueryVariables = query => {
+const getQueryVariables = (query) => {
     const output = {};
 
     const queries = query.split('&');
 
-    queries.forEach(item => {
+    queries.forEach((item) => {
         const pair = item.split('=');
-        output[pair[0]] = pair[1];
+        if (output[pair[0]]) {
+            // looks like we have an array of this query string.  Users will have to deal with it on their own
+            output[pair[0]] = [...output[pair[0]], pair[1]];
+        } else {
+            output[pair[0]] = pair[1];
+        }
     });
 
     return output;
@@ -21,12 +26,12 @@ const generateProps = (params, query, route) => {
     const props = {};
     if (query && route.queryMap) {
         const queryVars = getQueryVariables(query);
-        route.queryMap.forEach(queryMapItem => {
+        route.queryMap.forEach((queryMapItem) => {
             props[queryMapItem.prop] = queryVars[queryMapItem.query];
         });
     }
     if (params && route.paramMap) {
-        route.paramMap.forEach(paramMapItem => {
+        route.paramMap.forEach((paramMapItem) => {
             props[paramMapItem.prop] = params[paramMapItem.param];
         });
     }
