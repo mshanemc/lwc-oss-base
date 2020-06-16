@@ -71,7 +71,8 @@
             "base/progressBar",
             "base/router",
             "base/slds",
-            "base/utils"
+            "base/utils",
+            "base/illustration"
         ]
     }
 }
