@@ -12,8 +12,13 @@ const getQueryVariables = (query) => {
     queries.forEach((item) => {
         const pair = item.split('=');
         if (output[pair[0]]) {
-            // looks like we have an array of this query string.  Users will have to deal with it on their own
-            output[pair[0]] = [...output[pair[0]], pair[1]];
+            // looks like we already have this key.
+            if (Array.isArray(output[pair[0]])) {
+                // it's an array, so just append to it
+                output[pair[0]] = [...output[pair[0]], pair[1]];
+            } else {
+                output[pair[0]] = [output[pair[0]], pair[1]];
+            }
         } else {
             output[pair[0]] = pair[1];
         }
@@ -114,4 +119,4 @@ interface LWCRouterInput {
     routeTable: Route[];
 }
 
-export { lwcRouter };
+export { lwcRouter, getQueryVariables };
